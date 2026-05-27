@@ -33,10 +33,10 @@ Este é um aplicativo de delivery de comida saudável desenvolvido como um prot�
 
 | Login | Cardápio | Carrinho | Perfil (Sensores) |
 |-------|----------|----------|----------|
-| <img width="540" height="1097" alt="image" src="https://github.com/user-attachments/assets/c931ae75-3629-4010-99e8-eccf8e066404" />
- | <img width="394" height="800" alt="image" src="https://github.com/user-attachments/assets/fc3467ad-d4d1-40c9-a2a0-49f41bc0589c" />
- | <img width="540" height="1122" alt="image" src="https://github.com/user-attachments/assets/d0babf73-1410-4837-a478-f0c19185b73c" />
- | <img width="393" height="800" alt="image" src="https://github.com/user-attachments/assets/8151873c-da2a-4766-b785-5c61a09cd2eb" />
+| <img width="250" height="520" alt="image" src="https://github.com/user-attachments/assets/c931ae75-3629-4010-99e8-eccf8e066404" />
+ | <img width="250" height="520" alt="image" src="https://github.com/user-attachments/assets/fc3467ad-d4d1-40c9-a2a0-49f41bc0589c" />
+ | <img width="250" height="520" alt="image" src="https://github.com/user-attachments/assets/d0babf73-1410-4837-a478-f0c19185b73c" />
+ | <img width="250" height="520" alt="image" src="https://github.com/user-attachments/assets/8151873c-da2a-4766-b785-5c61a09cd2eb" />
  |
 
 ## 🚀 Como Instalar e Executar
