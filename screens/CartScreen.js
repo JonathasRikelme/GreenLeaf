@@ -25,7 +25,8 @@ const CartScreen = ({ navigation }) => {
           text: 'OK', 
           onPress: () => {
             limparCarrinho(); // Esvazia o carrinho
-            navigation.navigate('Home'); // Volta para a tela inicial do cardápio
+            // Navega para 'Main', que contém as abas (a aba padrão é a Home/Cardápio)
+            navigation.navigate('Main'); 
           } 
         }
       ]
