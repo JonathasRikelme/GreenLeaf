@@ -23,10 +23,19 @@ const ProfileScreen = () => {
   useEffect(() => {
     // Função para pedir permissão de notificações logo de cara
     const pedirPermissaoNotificacao = async () => {
-      const { status } = await Notifications.requestPermissionsAsync(); // Pede permissão ao sistema
-      if (status !== 'granted') {
-        console.log('Permissão de notificação negada!'); // Avisa no console se não deixarem
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
       }
+      
+      if (finalStatus !== 'granted') {
+        console.log('Permissão de notificação negada!');
+        return;
+      }
+      console.log('Permissão de notificação concedida!');
     };
 
     pedirPermissaoNotificacao(); // Executa o pedido
@@ -54,17 +63,36 @@ const ProfileScreen = () => {
 
   // Função para enviar uma notificação local (Sensor 2)
   const enviarNotificacaoTest = async () => {
-    // Agenda uma notificação para aparecer agora mesmo (daqui a 1 segundo)
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: "GreenLeaf Delivery 🥗", // Título da notificação
-        body: 'Seu pedido está sendo preparado com muito carinho!', // Texto da mensagem
-      },
-      trigger: { seconds: 1 }, // Dispara após 1 segundo (mais garantido no Expo Go)
-    });
+    console.log('Botão de notificação pressionado...');
     
-    // Mostra um alerta no app avisando que a notificação foi enviada
-    Alert.alert('Sucesso', 'Notificação enviada! Olhe a barra de avisos do seu celular.');
+    try {
+      // Verifica permissão novamente antes de enviar
+      const { status } = await Notifications.getPermissionsAsync();
+      if (status !== 'granted') {
+        const { status: newStatus } = await Notifications.requestPermissionsAsync();
+        if (newStatus !== 'granted') {
+          Alert.alert('Erro', 'Sem permissão para enviar notificações.');
+          return;
+        }
+      }
+
+      // Agenda uma notificação para aparecer AGORA (trigger: null)
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: "GreenLeaf Delivery 🥗",
+          body: 'Seu pedido está sendo preparado com muito carinho!',
+          sound: true,
+          priority: Notifications.AndroidNotificationPriority.HIGH,
+        },
+        trigger: null, // 'null' faz disparar imediatamente
+      });
+      
+      console.log('Notificação enviada com sucesso!');
+      Alert.alert('Sucesso', 'Notificação enviada! Olhe a barra de avisos do seu celular.');
+    } catch (error) {
+      console.error('Erro ao enviar notificação:', error);
+      Alert.alert('Erro', 'Não foi possível disparar a notificação.');
+    }
   };
 
   return (
